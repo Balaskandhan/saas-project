@@ -21,8 +21,8 @@ import commands.DB;
 
 @Path("/twitter")
 public class TwitterService {
-	String consumerKey = "JqbwmaX6Ej2KaG0bUFErRqnAL";
-	String consumerSecret = "5Z15PAASNawjycUNzHFNNt8eVJpJZQOvDwSjgHk2x5vHwQX6Gs";
+	String consumerKey = "xejdBtlktzwiQuzbcrlPqd7IT";
+	String consumerSecret = "BmVeTI4JKkP3id5bxtWo9NpD3I53r7VAHoXOVfJlj9V5n0oGjQ";
 
 	@GET
 	@Path("/request")
@@ -167,8 +167,7 @@ public class TwitterService {
 			}
 			try 
 			{
-				tweetStatus = twitter.updateStatus("Status Update from Heroku"
-						+ System.currentTimeMillis());
+				tweetStatus = twitter.updateStatus("When you do what you fear most, then you can do anything."+"\n"+"― Stephen Richards");
 			} 
 			catch (TwitterException e) 
 			{
