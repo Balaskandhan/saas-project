@@ -121,8 +121,7 @@ public class TwitterService {
 			e1.printStackTrace();
 		}
 		try {
-			tweetStatus = twitter.updateStatus("Status Update from Heroku"
-					+ System.currentTimeMillis());
+			tweetStatus = twitter.updateStatus("When you do what you fear most, then you can do anything."+"\n"+"― Stephen Richards");
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
