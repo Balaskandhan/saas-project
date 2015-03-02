@@ -126,8 +126,7 @@ public class TwitterService {
 			e.printStackTrace();
 		}
 		if (tweetStatus != null)
-			return "Check your Twitter, your tweet has been posted:"
-					+ tweetStatus.getText();
+			return "Check your Twitter, your tweet has been posted:";
 		else
 			return "BOO! didn't work";
 	}
@@ -175,8 +174,7 @@ public class TwitterService {
 		}
 		
 		if (tweetStatus != null)
-			return "Check your Twitter, your tweet has been posted:"
-					+ tweetStatus.getText();
+			return "Check your Twitter, your tweet has been posted:";
 		else
 			return "BOO! didn't work";
 	
