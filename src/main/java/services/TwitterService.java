@@ -132,7 +132,7 @@ public class TwitterService {
 	}
 	
 	@GET
-	@Path("/post")
+	@Path("/postmotiv")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String msgpost() 
 	{
@@ -181,4 +181,53 @@ public class TwitterService {
 		
 	}
 	
+	@GET
+	@Path("/postlove")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String msgpostmotiv() 
+	{
+		Twitter twitter = new TwitterFactory().getInstance();
+		Status tweetStatus = null;
+		AccessToken accessToken = null;
+		ArrayList<String> users = new ArrayList<>();
+		DB db = new DB();
+		users = db.getusers();
+		
+		try 
+		{
+			twitter.setOAuthConsumer(consumerKey, consumerSecret);
+		} 
+		catch (Exception e) 
+		{
+			System.out.println("The OAuthConsumer has likely already been set");
+		}
+		
+		for(String uname : users)
+		{
+			try 
+			{
+				accessToken = db.getOAuthToken(uname, "twitter");
+				twitter.setOAuthAccessToken(accessToken);
+			} 
+			catch (Exception e1) 
+			{
+				e1.printStackTrace();
+			}
+			try 
+			{
+				tweetStatus = twitter.updateStatus("We loved with a love that was more than love."+"\n"+"-Edgar Allan Poe");
+			} 
+			catch (TwitterException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		if (tweetStatus != null)
+			return "Check your Twitter, your tweet has been posted:";
+		else
+			return "BOO! didn't work";
+	
+		
+	}
 }
