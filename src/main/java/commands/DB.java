@@ -90,7 +90,7 @@ public class DB {
 	{
 		
 		ArrayList<String> quoteslist = new ArrayList<String>();
-		
+		String quote;
 		try {
 			Connection connection = ConnectionProvider.getConnection();
 			PreparedStatement stmt = connection
@@ -100,7 +100,8 @@ public class DB {
 			
 			while (rs.next()) 
 			{
-				quoteslist.add(rs.getString("quotes"));
+				quote = (rs.getString("quotes")) +"\n"+"-"+ (rs.getString("author"));
+				quoteslist.add(quote);
 			}
 						
 		}
@@ -111,7 +112,7 @@ public class DB {
 		{
 			e.printStackTrace();
 		}
-		System.out.println(quoteslist.toString());
+		//System.out.println(quoteslist.toString());
 		return quoteslist;		
 		
 	}
