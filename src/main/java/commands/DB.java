@@ -101,7 +101,6 @@ public class DB {
 			while (rs.next()) 
 			{
 				quoteslist.add(rs.getString("quotes"));
-				quoteslist.add(rs.getString("author"));
 			}
 						
 		}
