@@ -1,6 +1,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -186,12 +187,18 @@ public class TwitterService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String msgpostmotiv() 
 	{
+		
 		Twitter twitter = new TwitterFactory().getInstance();
 		Status tweetStatus = null;
 		AccessToken accessToken = null;
 		ArrayList<String> users = new ArrayList<>();
+		ArrayList<String> quotes = new ArrayList<>();
 		DB db = new DB();
 		users = db.getusers();
+		quotes = db.loveQuotes();
+		Random rand = new Random();
+		int r = rand.nextInt(quotes.size());
+		
 		
 		try 
 		{
@@ -215,8 +222,12 @@ public class TwitterService {
 			}
 			try 
 			{
-				tweetStatus = twitter.updateStatus("We loved with a love that was more than love."+"\n"+"-Edgar Allan Poe");
-			} 
+							
+				{
+				tweetStatus = twitter.updateStatus(quotes.get(r));
+			
+				} 
+			}
 			catch (TwitterException e) 
 			{
 				e.printStackTrace();

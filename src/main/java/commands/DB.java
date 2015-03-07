@@ -11,11 +11,11 @@ import twitter4j.auth.AccessToken;
 import connectionprovider.ConnectionProvider;
 
 public class DB {
-	/*public static void main(String args[])
+	public static void main(String args[])
 	{
 		DB db = new DB();
-		db.getusers();
-	}*/
+		db.loveQuotes();
+	}
 
 	public AccessToken getOAuthToken(String user, String application) {
 		AccessToken accessToken = null;
@@ -84,6 +84,116 @@ public class DB {
 		}
 		System.out.println(userslist.toString());
 		return userslist;		
+	}
+	
+	public ArrayList<String> loveQuotes()
+	{
+		
+		ArrayList<String> quoteslist = new ArrayList<String>();
+		
+		try {
+			Connection connection = ConnectionProvider.getConnection();
+			PreparedStatement stmt = connection
+					.prepareStatement("select quotes,author from love");
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) 
+			{
+				quoteslist.add(rs.getString("quotes"));
+				quoteslist.add(rs.getString("author"));
+			}
+						
+		}
+		catch (URISyntaxException e) 
+		{
+			e.printStackTrace();
+		} catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		System.out.println(quoteslist.toString());
+		return quoteslist;		
+		
+	}
+	
+	public ArrayList<String> motivQuotes()
+	{
+		
+		ArrayList<String> mquoteslist = new ArrayList<String>();
+		
+		try 
+		{
+			Connection connection = ConnectionProvider.getConnection();
+			PreparedStatement stmt = connection
+					.prepareStatement("select quotes,author from motiv");
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) 
+			{
+				mquoteslist.add(rs.getString("quotes"));
+				mquoteslist.add(rs.getString("author"));
+			}
+		}
+		catch (URISyntaxException e) 
+		{
+			e.printStackTrace();
+			
+		} catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		System.out.println(mquoteslist.toString());
+		return mquoteslist;		
+		
+	}
+	
+	public void rowcount() 
+	{
+		try
+		{
+			Connection connection = ConnectionProvider.getConnection();
+			PreparedStatement stmt = connection
+				.prepareStatement("select count(*) from love");
+			ResultSet rs = stmt.executeQuery();
+			int count =0;
+			while(rs.next())
+				{
+					count = rs.getInt(1);
+					System.out.println("number of quotes "+count);
+				}
+		}
+		catch (URISyntaxException e) 
+		{
+			e.printStackTrace();
+			
+		} catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		try
+		{
+			Connection connection = ConnectionProvider.getConnection();
+			PreparedStatement stmt = connection
+				.prepareStatement("select count(*) from motiv");
+			ResultSet rs = stmt.executeQuery();
+			int count =0;
+			while(rs.next())
+				{
+					count = rs.getInt(1);
+					System.out.println("number of quotes "+count);
+				}
+		}
+		catch (URISyntaxException e) 
+		{
+			e.printStackTrace();
+			
+		} catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 }
