@@ -148,6 +148,37 @@ public class DB {
 		
 	}
 	
+	public ArrayList<String> inspirationQuotes()
+	{
+		
+		ArrayList<String> iquoteslist = new ArrayList<String>();
+		
+		try 
+		{
+			Connection connection = ConnectionProvider.getConnection();
+			PreparedStatement stmt = connection
+					.prepareStatement("select quotes,author from inspiration");
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) 
+			{
+				iquoteslist.add(rs.getString("quotes"));
+				iquoteslist.add(rs.getString("author"));
+			}
+		}
+		catch (URISyntaxException e) 
+		{
+			e.printStackTrace();
+			
+		} catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		System.out.println(iquoteslist.toString());
+		return iquoteslist;		
+		
+	}
+	
 	public void rowcount() 
 	{
 		try

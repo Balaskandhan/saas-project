@@ -245,4 +245,64 @@ public class TwitterService {
 	
 		
 	}
+	
+	@GET
+	@Path("/postinspiration")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String msgPostInspire() 
+	{
+		
+		Twitter twitter = new TwitterFactory().getInstance();
+		Status tweetStatus = null;
+		AccessToken accessToken = null;
+		ArrayList<String> users = new ArrayList<>();
+		ArrayList<String> quotes = new ArrayList<>();
+		DB db = new DB();
+		users = db.getusers();
+		quotes = db.inspirationQuotes();
+		Random rand = new Random();
+		int r = rand.nextInt(quotes.size());
+		
+		
+		try 
+		{
+			twitter.setOAuthConsumer(consumerKey, consumerSecret);
+		} 
+		catch (Exception e) 
+		{
+			System.out.println("The OAuthConsumer has likely already been set");
+		}
+		
+		for(String uname : users)
+		{
+			try 
+			{
+				accessToken = db.getOAuthToken(uname, "twitter");
+				twitter.setOAuthAccessToken(accessToken);
+			} 
+			catch (Exception e1) 
+			{
+				e1.printStackTrace();
+			}
+			try 
+			{
+							
+				{
+				tweetStatus = twitter.updateStatus(quotes.get(r));
+			
+				} 
+			}
+			catch (TwitterException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		if (tweetStatus != null)
+			return "Check your Twitter, your tweet has been posted:";
+		else
+			return "BOO! didn't work";
+	
+		
+	}
 }
