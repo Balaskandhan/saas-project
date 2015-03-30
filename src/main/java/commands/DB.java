@@ -14,7 +14,7 @@ public class DB {
 	public static void main(String args[])
 	{
 		DB db = new DB();
-		db.loveQuotes();
+		db.getusers();
 	}
 
 	public AccessToken getOAuthToken(String user, String application) {

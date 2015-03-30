@@ -141,8 +141,12 @@ public class TwitterService {
 		Status tweetStatus = null;
 		AccessToken accessToken = null;
 		ArrayList<String> users = new ArrayList<>();
+		ArrayList<String> mquotes = new ArrayList<>();
 		DB db = new DB();
 		users = db.getusers();
+		mquotes = db.motivQuotes();
+		Random rand = new Random();
+		int r = rand.nextInt(mquotes.size());
 		
 		try 
 		{
@@ -166,7 +170,7 @@ public class TwitterService {
 			}
 			try 
 			{
-				tweetStatus = twitter.updateStatus("When you do what you fear most, then you can do anything."+"\n"+"― Stephen Richards");
+				tweetStatus = twitter.updateStatus(mquotes.get(r));
 			} 
 			catch (TwitterException e) 
 			{
@@ -185,7 +189,7 @@ public class TwitterService {
 	@GET
 	@Path("/postlove")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String msgpostmotiv() 
+	public String msgpostlove() 
 	{
 		
 		Twitter twitter = new TwitterFactory().getInstance();
