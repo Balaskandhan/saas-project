@@ -99,8 +99,7 @@ public class TwitterService {
 		}
 		
 		try {
-			tweetStatus = twitter.updateStatus("Test From Heroku"
-					+ System.currentTimeMillis());
+			tweetStatus = twitter.updateStatus("I just registered for the twitter app Tweet-a-quote");
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
@@ -141,16 +140,7 @@ public class TwitterService {
 			return "BOO! didn't work";
 	}
 	
-	@GET
-	@Path("/welcome")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String welcome(@QueryParam("email-id") String email_id,@QueryParam("Quote-love") String Quote_love,
-			@QueryParam("Quote-inspire") String Quote_inspire,
-			@QueryParam("Quote-motiv") String Quote_motiv)
-	{
-		return "working";
-		
-	}
+	
 	@GET
 	@Path("/postmotiv")
 	@Produces(MediaType.APPLICATION_JSON)
