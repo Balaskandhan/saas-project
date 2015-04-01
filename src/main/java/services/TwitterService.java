@@ -29,7 +29,8 @@ public class TwitterService {
 	@Path("/request")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAuthentication(@Context HttpServletResponse response,
-			@Context HttpServletRequest request, @QueryParam("user") String user) {
+			@Context HttpServletRequest request, @QueryParam("user") String user,@QueryParam("love_quote") String love_quote
+			,@QueryParam("inspire_quote") String inspire_quote,@QueryParam("motiv_quote") String motiv_quote) {
 		Twitter twitter = new TwitterFactory().getInstance();
 		try {
 			twitter.setOAuthConsumer(consumerKey, consumerSecret);
@@ -42,6 +43,9 @@ public class TwitterService {
 			
 			request.getSession().setAttribute("requestToken", requestToken);
 			request.getSession().setAttribute("username", user);
+			request.getSession().setAttribute("love_quote", love_quote);
+			request.getSession().setAttribute("inspire_quote", inspire_quote);
+			request.getSession().setAttribute("motiv_quote", motiv_quote);
 			response.sendRedirect(requestToken.getAuthorizationURL());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,6 +64,9 @@ public class TwitterService {
 		AccessToken accessToken = null;
 		RequestToken requestToken = null;
 		String user = null;
+		String love_quote = null;
+		String inspire_quote = null;
+		String motiv_quote = null;
 		try {
 			twitter.setOAuthConsumer(consumerKey, consumerSecret);
 		} catch (Exception e) {
@@ -83,8 +90,11 @@ public class TwitterService {
 		try {
 			DB db = new DB();
 			user = (String) request.getSession().getAttribute("username");
+			love_quote = (String) request.getSession().getAttribute("username");
+			inspire_quote = (String) request.getSession().getAttribute("username");
+			motiv_quote = (String) request.getSession().getAttribute("username");
 			db.saveOAuthToken(accessToken.getToken(), user, "twitter",
-					accessToken.getTokenSecret());
+					accessToken.getTokenSecret(),love_quote,inspire_quote,motiv_quote);
 		} catch (Exception e) {
 			System.out.println("Could not store access token to DB");
 		}
@@ -132,6 +142,16 @@ public class TwitterService {
 			return "BOO! didn't work";
 	}
 	
+	@GET
+	@Path("/welcome")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String welcome(@QueryParam("email-id") String email_id,@QueryParam("Quote-love") String Quote_love,
+			@QueryParam("Quote-inspire") String Quote_inspire,
+			@QueryParam("Quote-motiv") String Quote_motiv)
+	{
+		return "working";
+		
+	}
 	@GET
 	@Path("/postmotiv")
 	@Produces(MediaType.APPLICATION_JSON)

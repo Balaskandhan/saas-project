@@ -41,16 +41,42 @@ public class DB {
 	
 
 	public void saveOAuthToken(String otoken, String user, String app,
-			String secret) {
+			String secret,String love_quote,String inspire_quote,String motiv_quote) {
 
 		try {
 			Connection connection = ConnectionProvider.getConnection();
 			PreparedStatement stmt = connection
-					.prepareStatement("INSERT INTO TOKENS(oauth, username, application, secret) VALUES(?, ?, ?, ?)");
+					.prepareStatement("INSERT INTO TOKENS(oauth, username, application, secret,love_quote,inspire_quote,motiv_quote)"
+							+ " VALUES(?, ?, ?, ?, ?, ?, ?)");
 			stmt.setString(1, otoken);
 			stmt.setString(2, user);
 			stmt.setString(3, app);
 			stmt.setString(4, secret);
+			stmt.setString(5, love_quote);
+			stmt.setString(6, inspire_quote);
+			stmt.setString(7, motiv_quote);
+			stmt.executeUpdate();
+			} 
+		catch (URISyntaxException e) 
+		{
+			e.printStackTrace();
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public void userSubscription(String email_id,String quote_love,String quote_inspire,String quote_motiv)
+	{
+		try {
+			Connection connection = ConnectionProvider.getConnection();
+			PreparedStatement stmt = connection
+					.prepareStatement("INSERT INTO subscription(email_id, quote_love, quote_inspire, quote_motiv) VALUES(?, ?, ?, ?)");
+			stmt.setString(1, email_id);
+			stmt.setString(2, quote_love);
+			stmt.setString(3, quote_inspire);
+			stmt.setString(4, quote_motiv);
 			stmt.executeUpdate();
 			} 
 		catch (URISyntaxException e) 
