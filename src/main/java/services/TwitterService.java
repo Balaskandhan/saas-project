@@ -40,7 +40,6 @@ public class TwitterService {
 
 		try {
 			RequestToken requestToken = twitter.getOAuthRequestToken();
-			
 			request.getSession().setAttribute("requestToken", requestToken);
 			request.getSession().setAttribute("username", user);
 			request.getSession().setAttribute("love_quote", love_quote);
@@ -90,9 +89,9 @@ public class TwitterService {
 		try {
 			DB db = new DB();
 			user = (String) request.getSession().getAttribute("username");
-			love_quote = (String) request.getSession().getAttribute("username");
-			inspire_quote = (String) request.getSession().getAttribute("username");
-			motiv_quote = (String) request.getSession().getAttribute("username");
+			love_quote = (String) request.getSession().getAttribute("love_quote");
+			inspire_quote = (String) request.getSession().getAttribute("inspire_quote");
+			motiv_quote = (String) request.getSession().getAttribute("motiv_quote");
 			db.saveOAuthToken(accessToken.getToken(), user, "twitter",
 					accessToken.getTokenSecret(),love_quote,inspire_quote,motiv_quote);
 		} catch (Exception e) {
