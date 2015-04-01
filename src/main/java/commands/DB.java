@@ -121,7 +121,7 @@ public class DB {
 	{
 		
 		ArrayList<String> mquoteslist = new ArrayList<String>();
-		
+		String quote;
 		try 
 		{
 			Connection connection = ConnectionProvider.getConnection();
@@ -131,8 +131,8 @@ public class DB {
 			
 			while (rs.next()) 
 			{
-				mquoteslist.add(rs.getString("quotes"));
-				mquoteslist.add(rs.getString("author"));
+				quote = (rs.getString("quotes")) +"\n"+"-"+ (rs.getString("author"));
+				mquoteslist.add(quote);
 			}
 		}
 		catch (URISyntaxException e) 
@@ -152,7 +152,7 @@ public class DB {
 	{
 		
 		ArrayList<String> iquoteslist = new ArrayList<String>();
-		
+		String quote;
 		try 
 		{
 			Connection connection = ConnectionProvider.getConnection();
@@ -162,8 +162,8 @@ public class DB {
 			
 			while (rs.next()) 
 			{
-				iquoteslist.add(rs.getString("quotes"));
-				iquoteslist.add(rs.getString("author"));
+				quote = (rs.getString("quotes")) +"\n"+"-"+ (rs.getString("author"));
+				iquoteslist.add(quote);
 			}
 		}
 		catch (URISyntaxException e) 

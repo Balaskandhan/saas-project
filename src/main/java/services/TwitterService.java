@@ -302,7 +302,7 @@ public class TwitterService {
 			return "Check your Twitter, your tweet has been posted:";
 		else
 			return "BOO! didn't work";
-	
-		
 	}
+	
+	
 }
