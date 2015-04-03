@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+body {
+	background : #666;
+	background-image: url(background/twit1.jpg);
+	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+}

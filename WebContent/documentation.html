@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="style.css" rel="stylesheet" />
+<title>Documentation</title>
+</head>
+<body>
+<h1>API Documentation</h1>
+<p>This application posts in behalf of an user on twitter, the type of quotes they subscribed and like to be posted on their wall</p>
+<br>
+<br>
+<h3>@GET rest/twitter/request<h3>
+<p>This service takes the  oauth token, secret key provided by twitter to post to subscribers wall and the username and subscriptions they are subscribed for and store it in the database
+parameters used are Query parameters and parameters passed have to be like user=xxx love_quote=yes/no motiv_quote=yes/no
+inspiration_quote=yes/no</p>
+<h3>@GET rest/twitter/success<h3>
+<p>This service returns to the specified call back URL on success or failure with the respective message</p>
+<br>
+<h3>@GET rest/twitter/status<h3>
+<p>This service checks the status of the user and returns the result appropriately whether they have an active status or not </p>
+<br>
+<h3>@GET rest/twitter/postlove<h3>
+<p>This service posts the love_quote on the subscribers twitter who subscribed for it and doesn't take any parameter</p>
+<br>
+<h3>@GET rest/twitter/postmotive<h3>
+<p>This service posts the motivational_quote on the subscribers twitter who subscribed for it and doesn't take any parameter</p>
+<br>
+<h3>@GET rest/twitter/postinspire<h3>
+<p>This service posts the inspirational_quote on the subscribers twitter who subscribed for it and doesn't take any parameter</p>
+<br>
+<h3>@GET rest/twitter/postall<h3>
+<p>This service calls the postlove, postmotv and postinspire and post the tweet on the subscribers wall who are subscribed and depending on their subscription </p>
+<br>
+<footer>
+  <p>Author : Balaskandhan</p>
+  <p>In case you have any doubt just drop me an email @ the below address</p>
+  <br>
+  <p>Contact information: <a href="mailto:balaskandhan8@gmail.com">
+  balaskandhan8@gmail.com</a>.</p>
+</footer>
+</body>
+</html>
