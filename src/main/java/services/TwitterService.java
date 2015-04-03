@@ -99,13 +99,12 @@ public class TwitterService {
 		}
 		
 		try {
-			tweetStatus = twitter.updateStatus("I just registered for the twitter app Tweet-a-quote");
+			tweetStatus = twitter.updateStatus("I just got registered for the twitter app post-a-quote");
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
 		if (tweetStatus != null)
-			return "Check your Twitter, your tweet has been posted:"
-					+ tweetStatus.getText();
+			return " " + tweetStatus.getText();
 		else
 			return "BOO! didn't work";
 	}
@@ -135,7 +134,7 @@ public class TwitterService {
 			e.printStackTrace();
 		}
 		if (tweetStatus != null)
-			return "Check your Twitter, your tweet has been posted:";
+			return "HI your quote has been posted";
 		else
 			return "BOO! didn't work";
 	}
@@ -144,7 +143,7 @@ public class TwitterService {
 	@GET
 	@Path("/postmotiv")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String msgpost() 
+	public String msgPostMotiv() 
 	{
 		Twitter twitter = new TwitterFactory().getInstance();
 		Status tweetStatus = null;
@@ -152,7 +151,7 @@ public class TwitterService {
 		ArrayList<String> users = new ArrayList<>();
 		ArrayList<String> mquotes = new ArrayList<>();
 		DB db = new DB();
-		users = db.getusers();
+		users = db.getMotivQuoteUsers();
 		mquotes = db.motivQuotes();
 		Random rand = new Random();
 		int r = rand.nextInt(mquotes.size());
@@ -188,9 +187,9 @@ public class TwitterService {
 		}
 		
 		if (tweetStatus != null)
-			return "Check your Twitter, your tweet has been posted:";
+			return "HI your quote has been posted";
 		else
-			return "BOO! didn't work";
+			return "Some Problem";
 	
 		
 	}
@@ -207,7 +206,7 @@ public class TwitterService {
 		ArrayList<String> users = new ArrayList<>();
 		ArrayList<String> quotes = new ArrayList<>();
 		DB db = new DB();
-		users = db.getusers();
+		users = db.getLoveQuoteUsers();
 		quotes = db.loveQuotes();
 		Random rand = new Random();
 		int r = rand.nextInt(quotes.size());
@@ -248,11 +247,21 @@ public class TwitterService {
 		}
 		
 		if (tweetStatus != null)
-			return "Check your Twitter, your tweet has been posted:";
+			return "HI your quote has been posted";
 		else
-			return "BOO! didn't work";
+			return "Some Problem";
 	
 		
+	}
+	
+	@GET
+	@Path("/post")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void msgPostAll()
+	{
+		msgPostInspire();
+		msgpostlove();
+		msgPostMotiv();
 	}
 	
 	@GET
@@ -267,7 +276,7 @@ public class TwitterService {
 		ArrayList<String> users = new ArrayList<>();
 		ArrayList<String> quotes = new ArrayList<>();
 		DB db = new DB();
-		users = db.getusers();
+		users = db.getInspireQuoteUsers();
 		quotes = db.inspirationQuotes();
 		Random rand = new Random();
 		int r = rand.nextInt(quotes.size());
@@ -308,9 +317,9 @@ public class TwitterService {
 		}
 		
 		if (tweetStatus != null)
-			return "Check your Twitter, your tweet has been posted:";
+			return "HI your quote has been posted";
 		else
-			return "BOO! didn't work";
+			return "Some Problem";
 	}
 	
 	

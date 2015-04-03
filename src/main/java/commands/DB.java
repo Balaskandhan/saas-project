@@ -11,11 +11,11 @@ import twitter4j.auth.AccessToken;
 import connectionprovider.ConnectionProvider;
 
 public class DB {
-	public static void main(String args[])
+	/*public static void main(String args[])
 	{
 		DB db = new DB();
-		db.getusers();
-	}
+		//db.getusers();
+	}*/
 
 	public AccessToken getOAuthToken(String user, String application) {
 		AccessToken accessToken = null;
@@ -89,13 +89,59 @@ public class DB {
 		}
 	}
 	
-	public ArrayList<String> getusers()
+	public ArrayList<String> getLoveQuoteUsers()
 	{
 		ArrayList<String> userslist = new ArrayList<String>();
 		try {
 			Connection connection = ConnectionProvider.getConnection();
 			PreparedStatement stmt = connection
-					.prepareStatement("select username from tokens");
+					.prepareStatement("select username from tokens where love_quote like 'yes'");
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) 
+			{
+				userslist.add(rs.getString("username"));
+			}
+		}
+		catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(userslist.toString());
+		return userslist;		
+	}
+	
+	public ArrayList<String> getMotivQuoteUsers()
+	{
+		ArrayList<String> userslist = new ArrayList<String>();
+		try {
+			Connection connection = ConnectionProvider.getConnection();
+			PreparedStatement stmt = connection
+					.prepareStatement("select username from tokens where motiv_quote like 'yes'");
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) 
+			{
+				userslist.add(rs.getString("username"));
+			}
+		}
+		catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(userslist.toString());
+		return userslist;		
+	}
+	
+	public ArrayList<String> getInspireQuoteUsers()
+	{
+		ArrayList<String> userslist = new ArrayList<String>();
+		try {
+			Connection connection = ConnectionProvider.getConnection();
+			PreparedStatement stmt = connection
+					.prepareStatement("select username from tokens where Inspire_quote like 'yes'");
 			ResultSet rs = stmt.executeQuery();
 			
 			while (rs.next()) 
