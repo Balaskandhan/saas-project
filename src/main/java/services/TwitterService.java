@@ -6,11 +6,13 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -51,7 +53,26 @@ public class TwitterService {
 		}
 		return "";
 	}
-
+	
+	@POST
+	@Path("/register")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response register(@QueryParam("user") String user,@QueryParam("love_quote") String love_quote
+			,@QueryParam("inspire_quote") String inspire_quote,@QueryParam("motiv_quote") String motiv_quote)
+			{
+				DB db = new DB();
+				try {
+					if(db.addUser(user, love_quote, inspire_quote, motiv_quote))
+						return Response.status(201).build();
+					else
+						return Response.status(500).build();
+				} catch (Exception e) {
+					e.printStackTrace();
+					return Response.status(500).build();
+				}
+			}
+	
+	
 	@GET
 	@Path("/success")
 	@Produces(MediaType.APPLICATION_JSON)

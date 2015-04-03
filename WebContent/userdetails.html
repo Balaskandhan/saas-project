@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-latest.min.js">	</script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+base_url="https://saas-project.herokuapp.com/rest/twitter/request";
+$(document).ready(function(){
+    $('#register_form').submit(function(){
+    	if(!Username.value)
+			alert("Please enter your name"); 
+		else if(!lq.value) 
+			alert("Please enter value for Love Quote"); 
+		else if(!mq.value) 
+			alert("Please enter value for Love Quote"); 
+		else if(!iq.value)
+			alert("Please enter value for Love Quote"); 
+		
+		else {
+			base_url = base_url + "?username=" + user.value + "&love_quote=" + love.value + 
+			"&inspire_quote=" + inspire.value + "&motiv_quote=" + motiv.value;
+			postData();
+		}
+    	return false;
+    });
+    function postData(){
+        $.ajax({
+                type: "POST",
+                url: base_url,
+                success: function (data, status, jqXHR) {
+                    alert("Registration successful.");
+                    window.location.href='http://localhost:8080/saas-project/index.html';
+                },
+                error: function (jqXHR, status) {
+                    console.log(status);
+                    alert('Registration failed. Email Id is not available.');
+                    base_url="https://saas-project.herokuapp.com/rest/twitter/request";
+                }
+             });
+       }
+});
+</script>
+</head>
+<body background = "C:\Users\balas\workspace\saas-project\WebContent\background\twit1.jpg">
+<form id="register_form">
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+<center>
+User-name: <input type="text" name="user">
+<br>
+Subscribe for love Quotes: <input type="text" name="love">
+<br>
+Subscribe for Inspirational Quotes: <input type="text" name="inspire">
+<br>
+Subscribe for Motivational Quotes: <input type="text" name="motiv">
+<br>
+<input type="submit">
+</center>
+</form>
+</body>
+</html>

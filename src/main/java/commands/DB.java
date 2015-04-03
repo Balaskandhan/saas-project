@@ -67,26 +67,43 @@ public class DB {
 		}
 	}
 	
-	public void userSubscription(String email_id,String quote_love,String quote_inspire,String quote_motiv)
-	{
+	public boolean addUser(String user, String love_quote, String inspire_quote, String motiv_quote) {
+		boolean result = false;
+		if(isUsernameAvailable(user)) {
+			try {
+				Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement stmt = connection
+					.prepareStatement("INSERT INTO tokens(username,love_quote,inspire_quote,motiv_quote ) VALUES(?, ?, ?, ?, ?)");
+				stmt.setString(1, user);
+				stmt.setString(2, love_quote);
+				stmt.setString(3, inspire_quote);
+				stmt.setString(4, motiv_quote);
+				stmt.executeUpdate();
+				result = true;
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} 
+		return result;
+	}
+	
+	public boolean isUsernameAvailable(String username) {
+		boolean result = true;
 		try {
 			Connection connection = ConnectionProvider.getConnection();
-			PreparedStatement stmt = connection
-					.prepareStatement("INSERT INTO subscription(email_id, quote_love, quote_inspire, quote_motiv) VALUES(?, ?, ?, ?)");
-			stmt.setString(1, email_id);
-			stmt.setString(2, quote_love);
-			stmt.setString(3, quote_inspire);
-			stmt.setString(4, quote_motiv);
-			stmt.executeUpdate();
-			} 
-		catch (URISyntaxException e) 
-		{
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM tokens WHERE username=?");
+			stmt.setString(1, username);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) 
+				result = false;
+		} catch (URISyntaxException e) {
 			e.printStackTrace();
-		} 
-		catch (SQLException e) 
-		{
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return result;
 	}
 	
 	public ArrayList<String> getLoveQuoteUsers()
