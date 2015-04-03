@@ -9,13 +9,13 @@
 base_url="https://saas-project.herokuapp.com/rest/twitter/request";
 $(document).ready(function(){
     $('#register_form').submit(function(){
-    	if(!Username.value)
+    	if(!user.value)
 			alert("Please enter your name"); 
-		else if(!lq.value) 
+		else if(!love.value) 
 			alert("Please enter value for Love Quote"); 
-		else if(!mq.value) 
+		else if(!motiv.value) 
 			alert("Please enter value for Love Quote"); 
-		else if(!iq.value)
+		else if(!inspire.value)
 			alert("Please enter value for Love Quote"); 
 		
 		else {
@@ -35,7 +35,7 @@ $(document).ready(function(){
                 },
                 error: function (jqXHR, status) {
                     console.log(status);
-                    alert('Registration failed. Email Id is not available.');
+                    alert('Registration failed. user is not available.');
                     base_url="https://saas-project.herokuapp.com/rest/twitter/request";
                 }
              });
@@ -47,15 +47,15 @@ $(document).ready(function(){
 <form id="register_form">
 <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 <center>
-User-name: <input type="text" name="user">
+User-name: <input type="text" id="user">
 <br>
-Subscribe for love Quotes: <input type="text" name="love">
+Subscribe for love Quotes: <input type="text" id="love">
 <br>
-Subscribe for Inspirational Quotes: <input type="text" name="inspire">
+Subscribe for Inspirational Quotes: <input type="text" id="inspire">
 <br>
-Subscribe for Motivational Quotes: <input type="text" name="motiv">
+Subscribe for Motivational Quotes: <input type="text" id="motiv">
 <br>
-<input type="submit">
+<input type="submit" id=register value=register>
 </center>
 </form>
 </body>
