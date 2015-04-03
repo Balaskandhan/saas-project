@@ -11,11 +11,11 @@ import twitter4j.auth.AccessToken;
 import connectionprovider.ConnectionProvider;
 
 public class DB {
-	/*public static void main(String args[])
+	public static void main(String args[])
 	{
 		DB db = new DB();
-		//db.getusers();
-	}*/
+		db.getMotivQuoteUsers();
+	}
 
 	public AccessToken getOAuthToken(String user, String application) {
 		AccessToken accessToken = null;

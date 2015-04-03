@@ -255,13 +255,15 @@ public class TwitterService {
 	}
 	
 	@GET
-	@Path("/post")
+	@Path("/postall")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void msgPostAll()
+	public String msgPostAll()
 	{
 		msgPostInspire();
 		msgpostlove();
 		msgPostMotiv();
+		
+		return "your quotes has been posted successfully ";
 	}
 	
 	@GET
