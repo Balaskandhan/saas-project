@@ -32,15 +32,15 @@ public class ConnectionProvider {
 
 	public static void main(String[] args) {
 		try {
-			int rowcount = 0;
+			//int rowcount = 0;
 			Connection connection = getConnection();
 			Statement stmt = connection.createStatement();
 			//stmt.executeUpdate("INSERT INTO GOODS(THING) VALUES('My cool Item');");
-			//ResultSet rs = stmt.executeQuery("SELECT * FROM tokens");
-			ResultSet rs = stmt.executeQuery("SELECT count(*) FROM love");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+			//ResultSet rs = stmt.executeQuery("SELECT count(*) FROM love");
 			while (rs.next()) {
-				rowcount = rs.getInt(1);
-				System.out.println("total quotes: "+rowcount);
+				//rowcount = rs.getInt(1);
+				System.out.println("username: " + rs.getString("username"));
 				/*System.out.println("username: " + rs.getString("username") +"\t secret: " + rs.getString("secret")+"\t application: " + rs.getString("application")
 						+"\t oauth: " + rs.getString("oauth"));*/
 			}

@@ -1,61 +1,127 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="http://code.jquery.com/jquery-latest.min.js">	</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="styles.css" rel="stylesheet" />
-<script src="http://code.jquery.com/jquery-latest.min.js">	</script>
-<script type ="text/javascript">
-
-base_url="https://saas-project.herokuapp.com/rest/twitter/request";
-$(document).ready(function(){
-    $('#register_form').submit(function(){
-    	if(!user.value)
-			alert("Please enter your name"); 
-		else if(!love.value) 
-			alert("Please enter value for Love Quote"); 
-		else if(!motiv.value) 
-			alert("Please enter value for Love Quote"); 
-		else if(!inspire.value)
-			alert("Please enter value for Love Quote"); 
-		
-		else {
-			base_url = base_url + "?username=" + user.value + "&love_quote=" + love.value + 
-			"&inspire_quote=" + inspire.value + "&motiv_quote=" + motiv.value;
+<script>
+base_url="https://saas-project.herokuapp.com/rest/twitter/register";
+$(document).ready(function()
+{
+    $('#register_form').submit(function()
+    {
+    	//alert("Submit button clicked");
+    	if(!firstname.value)
+			alert("Please enter your First Name"); 
+    	else if(!lastname.value)
+    		alert("Please enter our last name");
+    	else if(!emailid.value)
+    		alert("please enter your email-id");
+    	else if(!password.value)
+    		alert("please enter the password");
+    	else if($('input[name=gender]:checked').length <= 0)
+    		{alert("please select your gender");}
+    	else if($('input[name=love]:checked').length <= 0)
+    		{alert("please select an option for Love Quote Subscription");}
+    	else if($('input[name=motivational]:checked').length <= 0)
+    		{alert("please select an option for motivational Quote Subscription");}
+    	else if($('input[name=inspirational]:checked').length <= 0)
+    		{alert("please select an option for inspirational Quote Subscription");}
+    	else 
+    	{
+			base_url = base_url + "?username=" + emailid.value + "&password=" + password.value + 
+			"&firstname=" + firstname.value + "&lastname=" + lastname.value + "&gender=" + $("input[name=gender]:checked").val()
+			+"&love_quote=" + $("input[name=love]:checked").val()+"&motiv_quote=" + $("input[name=motivational]:checked").val()
+			+"&inspire_quote=" + $("input[name=inspirational]:checked").val();
 			postData();
 		}
     	return false;
-    });
-    function postData(){
-        $.ajax({
+    	
+    	
+ 	});
+    
+    function postData()
+    {
+        $.ajax(
+        		{
                 type: "POST",
                 url: base_url,
-                success: function (data, status, jqXHR) {
+                success: function (data, status, jqXHR) 
+                {
                     alert("Registration successful.");
-                    window.location.href='http://localhost:8080/saas-project/index.html';
+                    window.location.href="https://saas-project.herokuapp.com/index.html";
                 },
-                error: function (jqXHR, status) {
+                error: function (jqXHR, status) 
+                {
                     console.log(status);
-                    alert('Registration failed. user is not available.');
-                    base_url="https://saas-project.herokuapp.com/rest/twitter/request";
+                    alert('Registration failed. Email Id is not available.');
+                    base_url="https://saas-project.herokuapp.com/rest/twitter/register";
                 }
+                
              });
-       }
+    }
+       
 });
+
 </script>
 </head>
 <body>
 <form id="register_form">
 <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
-<center>
-User-name: <input type="text" id="user">
-<br>
-Subscribe for love Quotes: <input type="text" id="love">
-<br>
-Subscribe for Inspirational Quotes: <input type="text" id="inspire">
-<br>
-Subscribe for Motivational Quotes: <input type="text" id="motiv">
-<br>
-<input type="submit" id=register value=register>
+<center> <font color="white" size="20" face="Helvetica Neue"><strong>Sign Up Here !!!</strong></font> </center>
+	
+<center> <table>
+<tr> <td colspan="5"> &nbsp; </td> </tr>
+<tr>
+<td> <font color="white"> First Name: </font> </td>	
+<td> <input type="text" id=firstname> </td>
+</tr>
+<tr> <td colspan="5"> &nbsp; </td> </tr>
+<tr>
+<td> <font color="white"> Last Name: </font>	</td>
+<td> <input type="text" id=lastname> </td>
+</tr>
+<tr> <td colspan="5"> &nbsp; </td> </tr>
+<tr>
+<td> <font color="white"> Email Id: </font></td>
+<td> <input type="text" id=emailid> </td>
+</tr>
+<tr> <td colspan="5"> &nbsp; </td> </tr>
+<tr>
+<td> <font color="white"> Password: </font> </td>	
+<td> <input type="password" id=password> </td>
+</tr>
+<tr> <td colspan="5"> &nbsp; </td> </tr>
+<tr>
+<td> </td>
+<td> <input type="radio" name="gender" id=male value="Female"> <font color="white"> Female </font> 
+	 <input type="radio" name="gender" id=female value="Male"> <font color="white"> Male </font> </td>
+</tr> 
+	 <td colspan="1px"> Subscribe for Love Quotes </td>
+	 <td>
+	 <input type="radio" name="love" id=yes value="yes"> <font color="white"> Yes </font> 
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="love" id=No  value="No"> <font color="white"> No </font> </td>
+</tr>
+<td colspan="1px">Subscribe for Motivational Quotes </td>
+<td> 
+	 <input type="radio" name="motivational" id=yes value="yes"> <font color="white"> Yes </font> 
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="motivational" id=No  value="No"> <font color="white"> No </font> </td>
+</tr>
+<td colspan="1px">Subscribe for Inspirational Quotes </td>
+<td> 
+	 <input type="radio" name="inspirational" id=yes value="yes"> <font color="white"> Yes </font> 
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="inspirational" id=No  value="No"> <font color="white"> No </font> </td>
+</tr>
+<tr> <td colspan="5px"> &nbsp; </td> </tr>
+</table> </center>
+	
+<center> 
+<table> 
+<tr> 
+<td> &nbsp; </td>
+<td> <input type="Submit" id="signup" value="Sign Up" style="width: 100px; height: 30px"> </td> 
+</tr>
+</table> 
 </center>
 </form>
 </body>

@@ -14,7 +14,7 @@ public class DB {
 	public static void main(String args[])
 	{
 		DB db = new DB();
-		db.getMotivQuoteUsers();
+		db.isUsernameAvailable("bbkandhan@gmail.com");
 	}
 
 	public AccessToken getOAuthToken(String user, String application) {
@@ -67,22 +67,33 @@ public class DB {
 		}
 	}
 	
-	public boolean addUser(String user, String love_quote, String inspire_quote, String motiv_quote) {
+	public boolean addUser(String uname,String pwd,String fname,String lname,String gender,String love, String motivation, String inspiration) 
+	{
 		boolean result = false;
-		if(isUsernameAvailable(user)) {
-			try {
+		if(isUsernameAvailable(uname)) 
+		{
+			try 
+			{
 				Connection connection = ConnectionProvider.getConnection();
 				PreparedStatement stmt = connection
-					.prepareStatement("INSERT INTO tokens(username,love_quote,inspire_quote,motiv_quote ) VALUES(?, ?, ?, ?, ?)");
-				stmt.setString(1, user);
-				stmt.setString(2, love_quote);
-				stmt.setString(3, inspire_quote);
-				stmt.setString(4, motiv_quote);
+					.prepareStatement("INSERT INTO users(username,password,fname,lname,gender,love,motiv,inspire ) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+				stmt.setString(1, uname);
+				stmt.setString(2, pwd);
+				stmt.setString(3, fname);
+				stmt.setString(4, lname);
+				stmt.setString(5, gender);
+				stmt.setString(6, love);
+				stmt.setString(7, motivation);
+				stmt.setString(8, inspiration);
 				stmt.executeUpdate();
 				result = true;
-			} catch (URISyntaxException e) {
+			} 
+			catch (URISyntaxException e) 
+			{
 				e.printStackTrace();
-			} catch (SQLException e) {
+			} 
+			catch (SQLException e) 
+			{
 				e.printStackTrace();
 			}
 		} 
@@ -93,16 +104,20 @@ public class DB {
 		boolean result = true;
 		try {
 			Connection connection = ConnectionProvider.getConnection();
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM tokens WHERE username=?");
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM users WHERE username=?");
 			stmt.setString(1, username);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) 
+			{
 				result = false;
+				System.out.println("username: "+rs.getString("username"));
+			}
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		//System.out.println("username: "+rs.getString("username"));
 		return result;
 	}
 	

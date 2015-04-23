@@ -57,12 +57,14 @@ public class TwitterService {
 	@POST
 	@Path("/register")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response register(@QueryParam("user") String user,@QueryParam("love_quote") String love_quote
-			,@QueryParam("inspire_quote") String inspire_quote,@QueryParam("motiv_quote") String motiv_quote)
+	public Response register(@QueryParam("username") String username, @QueryParam("password") String password, 
+			@QueryParam("firstname") String firstname, @QueryParam("lastname") String lastname, 
+			@QueryParam("gender") String gender,@QueryParam("love_quote") String love_quote
+			,@QueryParam("motiv_quote") String motiv_quote,@QueryParam("inspire_quote") String inspire_quote)
 			{
 				DB db = new DB();
 				try {
-					if(db.addUser(user, love_quote, inspire_quote, motiv_quote))
+					if(db.addUser(username,password,firstname,lastname,gender,love_quote, motiv_quote, inspire_quote))
 						return Response.status(201).build();
 					else
 						return Response.status(500).build();
