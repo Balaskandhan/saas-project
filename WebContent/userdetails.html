@@ -24,11 +24,10 @@ $(document).ready(function(){
 			alert("please select an option for Inspirational Quote Subscription");
 		}
 		else {
-			
 			base_url = base_url + "?username=" + emailid.value + "&password=" + password.value 
 				+"&love_quote=" + $("input[name=love]:checked").val()+"&motiv_quote=" + $("input[name=motivational]:checked").val()
 				+"&inspire_quote=" + $("input[name=inspirational]:checked").val();
-			redir_url = redir_url + "?user=" + emialid.value;
+			redir_url = redir_url + "?user=" + emailid.value;
 			postData();
 		}
     	return false;
@@ -39,7 +38,7 @@ $(document).ready(function(){
                 url: base_url,
                 success: function (data, status, jqXHR) {
                     alert("Registration successful.");
-                    window.location.href='https://saas-project.herokuapp.com/rest/twitter/request';
+                    window.location.href=redir_url;
                 },
                 error: function (jqXHR, status) {
                     console.log(status);
