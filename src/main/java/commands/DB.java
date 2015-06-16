@@ -14,7 +14,7 @@ public class DB {
 	public static void main(String args[])
 	{
 		DB db = new DB();
-		db.isUsernameAvailable("bbkandhan@gmail.com");
+		db.isUsernameAvailable("balaskandhan@hotmail.com");
 	}
 
 	public AccessToken getOAuthToken(String user, String application) {
@@ -41,20 +41,16 @@ public class DB {
 	
 
 	public void saveOAuthToken(String otoken, String user, String app,
-			String secret,String love_quote,String inspire_quote,String motiv_quote) {
+			String secret) {
 
 		try {
 			Connection connection = ConnectionProvider.getConnection();
 			PreparedStatement stmt = connection
-					.prepareStatement("INSERT INTO TOKENS(oauth, username, application, secret,love_quote,inspire_quote,motiv_quote)"
-							+ " VALUES(?, ?, ?, ?, ?, ?, ?)");
-			stmt.setString(1, otoken);
-			stmt.setString(2, user);
-			stmt.setString(3, app);
-			stmt.setString(4, secret);
-			stmt.setString(5, love_quote);
-			stmt.setString(6, inspire_quote);
-			stmt.setString(7, motiv_quote);
+					.prepareStatement("INSERT INTO TOKENS(username, application, secret, oauth) VALUES(?, ?, ?, ?)");
+			stmt.setString(1, user);
+			stmt.setString(2, app);
+			stmt.setString(3, secret);
+			stmt.setString(4, otoken);
 			stmt.executeUpdate();
 			} 
 		catch (URISyntaxException e) 
@@ -76,7 +72,7 @@ public class DB {
 			{
 				Connection connection = ConnectionProvider.getConnection();
 				PreparedStatement stmt = connection
-					.prepareStatement("INSERT INTO users(username,password,fname,lname,gender,love,motiv,inspire ) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+					.prepareStatement("INSERT INTO users(username,password,fname,lname,gender,love,motivation,inspiration ) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
 				stmt.setString(1, uname);
 				stmt.setString(2, pwd);
 				stmt.setString(3, fname);
@@ -104,7 +100,7 @@ public class DB {
 		boolean result = true;
 		try {
 			Connection connection = ConnectionProvider.getConnection();
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM users WHERE username=?");
+			PreparedStatement stmt = connection.prepareStatement("SELECT username FROM users WHERE username=?");
 			stmt.setString(1, username);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) 
@@ -216,7 +212,7 @@ public class DB {
 		{
 			e.printStackTrace();
 		}
-		//System.out.println(quoteslist.toString());
+		System.out.println(quoteslist.toString());
 		return quoteslist;		
 		
 	}

@@ -5,64 +5,54 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="styles.css" rel="stylesheet" />
 <script>
-base_url="https://saas-project.herokuapp.com/rest/twitter/register";
-$(document).ready(function()
-{
-    $('#register_form').submit(function()
-    {
-    	//alert("Submit button clicked");
+base_url="http://localhost:8080/saas-project/rest/twitter/register";
+$(document).ready(function(){
+    $('#register_form').submit(function(){
     	if(!firstname.value)
 			alert("Please enter your First Name"); 
-    	else if(!lastname.value)
-    		alert("Please enter our last name");
-    	else if(!emailid.value)
-    		alert("please enter your email-id");
-    	else if(!password.value)
-    		alert("please enter the password");
-    	else if($('input[name=gender]:checked').length <= 0)
-    		{alert("please select your gender");}
-    	else if($('input[name=love]:checked').length <= 0)
-    		{alert("please select an option for Love Quote Subscription");}
-    	else if($('input[name=motivational]:checked').length <= 0)
-    		{alert("please select an option for motivational Quote Subscription");}
-    	else if($('input[name=inspirational]:checked').length <= 0)
-    		{alert("please select an option for inspirational Quote Subscription");}
-    	else 
-    	{
+		else if(!lastname.value) 
+			alert("Please enter your Last Name"); 
+		else if(!emailid.value) 
+			alert("Please enter your Email Id"); 
+		else if(!password.value)
+			alert("Please enter your Password"); 
+		else if ($('input[name=gender]:checked').length <= 0) {
+			alert("Please enter your Gender");
+		}
+		else if ($('input[name=love]:checked').length <= 0) {
+			alert("please select an option for Love Quote Subscription");
+		}
+		else if ($('input[name=motivational]:checked').length <= 0) {
+			alert("please select an option for Motivational Quote Subscription");
+		}
+		else if ($('input[name=inspirational]:checked').length <= 0) {
+			alert("please select an option for Inspirational Quote Subscription");
+		}
+		else {
 			base_url = base_url + "?username=" + emailid.value + "&password=" + password.value + 
-			"&firstname=" + firstname.value + "&lastname=" + lastname.value + "&gender=" + $("input[name=gender]:checked").val()
-			+"&love_quote=" + $("input[name=love]:checked").val()+"&motiv_quote=" + $("input[name=motivational]:checked").val()
-			+"&inspire_quote=" + $("input[name=inspirational]:checked").val();
+				"&firstname=" + firstname.value + "&lastname=" + lastname.value + "&gender=" + $("input[name=gender]:checked").val()
+				+"&love_quote=" + $("input[name=love]:checked").val()+"&motiv_quote=" + $("input[name=motivational]:checked").val()
+				+"&inspire_quote=" + $("input[name=inspirational]:checked").val();
 			postData();
 		}
     	return false;
-    	
-    	
- 	});
-    
-    function postData()
-    {
-        $.ajax(
-        		{
+    });
+    function postData(){
+        $.ajax({
                 type: "POST",
                 url: base_url,
-                success: function (data, status, jqXHR) 
-                {
+                success: function (data, status, jqXHR) {
                     alert("Registration successful.");
-                    window.location.href="https://saas-project.herokuapp.com/index.html";
+                    window.location.href='http://localhost:8080/saas-project/userdetails.html';
                 },
-                error: function (jqXHR, status) 
-                {
+                error: function (jqXHR, status) {
                     console.log(status);
                     alert('Registration failed. Email Id is not available.');
-                    base_url="https://saas-project.herokuapp.com/rest/twitter/register";
+                    base_url="http://localhost:8080/saas-project/rest/twitter/register";
                 }
-                
              });
-    }
-       
+       }
 });
-
 </script>
 </head>
 <body>

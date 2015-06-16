@@ -31,8 +31,7 @@ public class TwitterService {
 	@Path("/request")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAuthentication(@Context HttpServletResponse response,
-			@Context HttpServletRequest request, @QueryParam("user") String user,@QueryParam("love_quote") String love_quote
-			,@QueryParam("inspire_quote") String inspire_quote,@QueryParam("motiv_quote") String motiv_quote) {
+			@Context HttpServletRequest request, @QueryParam("user") String user,@QueryParam("pwd") String pwd) {
 		Twitter twitter = new TwitterFactory().getInstance();
 		try {
 			twitter.setOAuthConsumer(consumerKey, consumerSecret);
@@ -44,9 +43,6 @@ public class TwitterService {
 			RequestToken requestToken = twitter.getOAuthRequestToken();
 			request.getSession().setAttribute("requestToken", requestToken);
 			request.getSession().setAttribute("username", user);
-			request.getSession().setAttribute("love_quote", love_quote);
-			request.getSession().setAttribute("inspire_quote", inspire_quote);
-			request.getSession().setAttribute("motiv_quote", motiv_quote);
 			response.sendRedirect(requestToken.getAuthorizationURL());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,9 +82,6 @@ public class TwitterService {
 		AccessToken accessToken = null;
 		RequestToken requestToken = null;
 		String user = null;
-		String love_quote = null;
-		String inspire_quote = null;
-		String motiv_quote = null;
 		try {
 			twitter.setOAuthConsumer(consumerKey, consumerSecret);
 		} catch (Exception e) {
@@ -112,11 +105,8 @@ public class TwitterService {
 		try {
 			DB db = new DB();
 			user = (String) request.getSession().getAttribute("username");
-			love_quote = (String) request.getSession().getAttribute("love_quote");
-			inspire_quote = (String) request.getSession().getAttribute("inspire_quote");
-			motiv_quote = (String) request.getSession().getAttribute("motiv_quote");
 			db.saveOAuthToken(accessToken.getToken(), user, "twitter",
-					accessToken.getTokenSecret(),love_quote,inspire_quote,motiv_quote);
+					accessToken.getTokenSecret());
 		} catch (Exception e) {
 			System.out.println("Could not store access token to DB");
 		}

@@ -3,6 +3,8 @@ package model;
 public class UserDetails 
 {
 	private String username;
+	private String password;
+	private String gender;
 	private String lq;
 	private String mq;
 	private String iq;
@@ -30,6 +32,18 @@ public class UserDetails
 	}
 	public void setIq(String iq) {
 		this.iq = iq;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	

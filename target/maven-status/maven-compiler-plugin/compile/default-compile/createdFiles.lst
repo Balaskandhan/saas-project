@@ -1,4 +1,5 @@
 launch\Main.class
+model\UserDetails.class
 connectionprovider\ConnectionProvider.class
 services\TwitterService.class
 commands\DB.class
