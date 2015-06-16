@@ -7,6 +7,7 @@
 <script>
 //base_url="https://saas-project.herokuapp.com/rest/twitter/register";
 base_url="https://saas-project.herokuapp.com/rest/twitter/request";
+work_url="https://saas-project.herokuapp.com/rest/twitter/success";
 $(document).ready(function(){
     $('#register_form').submit(function(){
     	if(!emailid.value)
@@ -14,16 +15,15 @@ $(document).ready(function(){
 		else {
 			
 			base_url = base_url + "?username=" + emailid.value;
-			alert("Registration successful.");
-            window.location.href=base_url;
-			//postData();
+		
+			postData();
 		}
     	return false;
     });
-    /*function postData(){
+    function postData(){
         $.ajax({
                 type: "POST",
-                url: base_url,
+                url: work_url,
                 success: function (data, status, jqXHR) {
                     alert("Registration successful.");
                     window.location.href='https://saas-project.herokuapp.com/authorize.html';
@@ -31,10 +31,10 @@ $(document).ready(function(){
                 error: function (jqXHR, status) {
                     console.log(status);
                     alert('Registration failed. Email Id is not available.');
-                    base_url="https://saas-project.herokuapp.com/rest/twitter/request";
+                    base_url="https://saas-project.herokuapp.com/rest/twitter/success";
                 }
              });
-       }*/
+       }
 });
 </script>
 </head>
