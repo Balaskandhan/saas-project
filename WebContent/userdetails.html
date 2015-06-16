@@ -24,7 +24,6 @@ $(document).ready(function(){
 			alert("please select an option for Inspirational Quote Subscription");
 		}
 		else {
-			redir_url = redir_url + "?username=" + emailid.value;
 			
 			base_url = base_url + "?username=" + emailid.value + "&password=" + password.value 
 				+"&love_quote=" + $("input[name=love]:checked").val()+"&motiv_quote=" + $("input[name=motivational]:checked").val()
@@ -40,7 +39,7 @@ $(document).ready(function(){
                 url: base_url,
                 success: function (data, status, jqXHR) {
                     alert("Registration successful.");
-                    window.location.href=redir_url;
+                    window.location.href='https://saas-project.herokuapp.com/authorize.html';
                 },
                 error: function (jqXHR, status) {
                     console.log(status);

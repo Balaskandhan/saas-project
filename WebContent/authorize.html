@@ -1,10 +1,74 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-latest.min.js">	</script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="styles.css" rel="stylesheet" />
+<script>
+//base_url="https://saas-project.herokuapp.com/rest/twitter/register";
+base_url="https://saas-project.herokuapp.com/rest/twitter/request";
+$(document).ready(function(){
+    $('#register_form').submit(function(){
+    	if(!emailid.value)
+			alert("Please enter your Email ID"); 
+		else {
+			
+			base_url = base_url + "?username=" + emailid.value;
+			
+			postData();
+		}
+    	return false;
+    });
+    function postData(){
+        $.ajax({
+                type: "POST",
+                url: base_url,
+                success: function (data, status, jqXHR) {
+                    alert("Registration successful.");
+                    window.location.href='https://saas-project.herokuapp.com/index.html';
+                },
+                error: function (jqXHR, status) {
+                    console.log(status);
+                    alert('Registration failed. Email Id is not available.');
+                    base_url="https://saas-project.herokuapp.com/rest/twitter/request";
+                }
+             });
+       }
+});
+</script>
 </head>
 <body>
+<form id="register_form">
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+<center> <font color="white" size="20" face="Helvetica Neue"><strong>Sign Up Here !!!</strong></font> </center>
+	
+<center> <table>
+<tr> <td colspan="5"> &nbsp; </td> </tr>
+<!--  <tr>
+<td> <font color="white"> First Name: </font> </td>	
+<td> <input type="text" id=firstname> </td>
+</tr>
+<tr> <td colspan="5"> &nbsp; </td> </tr>
+<tr>
+<td> <font color="white"> Last Name: </font>	</td>
+<td> <input type="text" id=lastname> </td>
+</tr>-->
+<tr> <td colspan="5"> &nbsp; </td> </tr>
+<tr>
+<td> <font color="white"> Email Id: </font></td>
+<td> <input type="text" id=emailid> </td>
+</tr>
 
+</table> </center>
+	
+<center> 
+<table> 
+<tr> 
+<td> &nbsp; </td>
+<td> <input type="Submit" id="signup" value="Authorize!" style="width: 100px; height: 30px"> </td> 
+</tr>
+</table> 
+</center>
+</form>
 </body>
 </html>
