@@ -63,7 +63,7 @@ public class DB {
 		}
 	}
 	
-	public boolean addUser(String uname,String pwd,String fname,String lname,String gender,String love, String motivation, String inspiration) 
+	public boolean addUser(String uname,String pwd,String love, String motivation, String inspiration) 
 	{
 		boolean result = false;
 		if(isUsernameAvailable(uname)) 
@@ -72,15 +72,12 @@ public class DB {
 			{
 				Connection connection = ConnectionProvider.getConnection();
 				PreparedStatement stmt = connection
-					.prepareStatement("INSERT INTO users(username,password,fname,lname,gender,love,motivation,inspiration ) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+					.prepareStatement("INSERT INTO users(username,password,love,motivation,inspiration ) VALUES(?, ?, ?, ?, ?)");
 				stmt.setString(1, uname);
 				stmt.setString(2, pwd);
-				stmt.setString(3, fname);
-				stmt.setString(4, lname);
-				stmt.setString(5, gender);
-				stmt.setString(6, love);
-				stmt.setString(7, motivation);
-				stmt.setString(8, inspiration);
+				stmt.setString(3, love);
+				stmt.setString(4, motivation);
+				stmt.setString(5, inspiration);
 				stmt.executeUpdate();
 				result = true;
 			} 

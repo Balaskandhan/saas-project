@@ -31,7 +31,7 @@ public class TwitterService {
 	@Path("/request")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAuthentication(@Context HttpServletResponse response,
-			@Context HttpServletRequest request, @QueryParam("user") String user,@QueryParam("pwd") String pwd) {
+			@Context HttpServletRequest request, @QueryParam("user") String user) {
 		Twitter twitter = new TwitterFactory().getInstance();
 		try {
 			twitter.setOAuthConsumer(consumerKey, consumerSecret);
@@ -54,13 +54,12 @@ public class TwitterService {
 	@Path("/register")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response register(@QueryParam("username") String username, @QueryParam("password") String password, 
-			@QueryParam("firstname") String firstname, @QueryParam("lastname") String lastname, 
-			@QueryParam("gender") String gender,@QueryParam("love_quote") String love_quote
+			@QueryParam("love_quote") String love_quote
 			,@QueryParam("motiv_quote") String motiv_quote,@QueryParam("inspire_quote") String inspire_quote)
 			{
 				DB db = new DB();
 				try {
-					if(db.addUser(username,password,firstname,lastname,gender,love_quote, motiv_quote, inspire_quote))
+					if(db.addUser(username,password,love_quote, motiv_quote, inspire_quote))
 						return Response.status(201).build();
 					else
 						return Response.status(500).build();

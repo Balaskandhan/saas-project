@@ -6,18 +6,13 @@
 <link href="styles.css" rel="stylesheet" />
 <script>
 base_url="http://localhost:8080/saas-project/rest/twitter/register";
+redir_url="https://saas-project.herokuapp.com/rest/twitter/request";
 $(document).ready(function(){
     $('#register_form').submit(function(){
-    	if(!firstname.value)
-			alert("Please enter your First Name"); 
-		else if(!lastname.value) 
-			alert("Please enter your Last Name"); 
-		else if(!emailid.value) 
-			alert("Please enter your Email Id"); 
-		else if(!password.value)
-			alert("Please enter your Password"); 
-		else if ($('input[name=gender]:checked').length <= 0) {
-			alert("Please enter your Gender");
+    	if(!emailid.value)
+			alert("Please enter your Email ID"); 
+		else if(!password.value) {
+			alert("Please enter your password"); 
 		}
 		else if ($('input[name=love]:checked').length <= 0) {
 			alert("please select an option for Love Quote Subscription");
@@ -29,10 +24,10 @@ $(document).ready(function(){
 			alert("please select an option for Inspirational Quote Subscription");
 		}
 		else {
-			base_url = base_url + "?username=" + emailid.value + "&password=" + password.value + 
-				"&firstname=" + firstname.value + "&lastname=" + lastname.value + "&gender=" + $("input[name=gender]:checked").val()
+			base_url = base_url + "?username=" + emailid.value + "&password=" + password.value 
 				+"&love_quote=" + $("input[name=love]:checked").val()+"&motiv_quote=" + $("input[name=motivational]:checked").val()
 				+"&inspire_quote=" + $("input[name=inspirational]:checked").val();
+			redir_url = redir_url + "?username=" + emailid.value;
 			postData();
 		}
     	return false;
@@ -43,7 +38,7 @@ $(document).ready(function(){
                 url: base_url,
                 success: function (data, status, jqXHR) {
                     alert("Registration successful.");
-                    window.location.href='http://localhost:8080/saas-project/userdetails.html';
+                    window.location.href=redir_url;
                 },
                 error: function (jqXHR, status) {
                     console.log(status);
@@ -62,7 +57,7 @@ $(document).ready(function(){
 	
 <center> <table>
 <tr> <td colspan="5"> &nbsp; </td> </tr>
-<tr>
+<!--  <tr>
 <td> <font color="white"> First Name: </font> </td>	
 <td> <input type="text" id=firstname> </td>
 </tr>
@@ -70,7 +65,7 @@ $(document).ready(function(){
 <tr>
 <td> <font color="white"> Last Name: </font>	</td>
 <td> <input type="text" id=lastname> </td>
-</tr>
+</tr>-->
 <tr> <td colspan="5"> &nbsp; </td> </tr>
 <tr>
 <td> <font color="white"> Email Id: </font></td>
@@ -81,12 +76,13 @@ $(document).ready(function(){
 <td> <font color="white"> Password: </font> </td>	
 <td> <input type="password" id=password> </td>
 </tr>
+<!-- 
 <tr> <td colspan="5"> &nbsp; </td> </tr>
 <tr>
 <td> </td>
 <td> <input type="radio" name="gender" id=male value="Female"> <font color="white"> Female </font> 
 	 <input type="radio" name="gender" id=female value="Male"> <font color="white"> Male </font> </td>
-</tr> 
+</tr>  -->
 	 <td colspan="1px"> Subscribe for Love Quotes </td>
 	 <td>
 	 <input type="radio" name="love" id=yes value="yes"> <font color="white"> Yes </font> 
