@@ -26,13 +26,14 @@ import commands.DB;
 public class TwitterService {
 	String consumerKey = "xejdBtlktzwiQuzbcrlPqd7IT";
 	String consumerSecret = "BmVeTI4JKkP3id5bxtWo9NpD3I53r7VAHoXOVfJlj9V5n0oGjQ";
-
+	//String event = null;
 	@GET
 	@Path("/request")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAuthentication(@Context HttpServletResponse response,
 			@Context HttpServletRequest request, @QueryParam("user") String user) {
 		Twitter twitter = new TwitterFactory().getInstance();
+		twitter.setOAuthAccessToken(null);
 		try {
 			twitter.setOAuthConsumer(consumerKey, consumerSecret);
 		} catch (Exception e) {
