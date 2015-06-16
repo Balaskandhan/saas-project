@@ -33,7 +33,7 @@ public class TwitterService {
 	public String getAuthentication(@Context HttpServletResponse response,
 			@Context HttpServletRequest request, @QueryParam("user") String user) {
 		Twitter twitter = new TwitterFactory().getInstance();
-		twitter.setOAuthAccessToken(null);
+		//twitter.setOAuthAccessToken(null);
 		try {
 			twitter.setOAuthConsumer(consumerKey, consumerSecret);
 		} catch (Exception e) {
