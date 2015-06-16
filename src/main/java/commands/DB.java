@@ -120,7 +120,7 @@ public class DB {
 		try {
 			Connection connection = ConnectionProvider.getConnection();
 			PreparedStatement stmt = connection
-					.prepareStatement("select username from tokens where love_quote like 'yes'");
+					.prepareStatement("select username from users where love_quote like 'yes'");
 			ResultSet rs = stmt.executeQuery();
 			
 			while (rs.next()) 
