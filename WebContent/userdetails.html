@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="styles.css" rel="stylesheet" />
 <script>
-base_url="http://localhost:8080/saas-project/rest/twitter/register";
+base_url="https://saas-project.herokuapp.com/rest/twitter/register";
 redir_url="https://saas-project.herokuapp.com/rest/twitter/request";
 $(document).ready(function(){
     $('#register_form').submit(function(){
@@ -43,7 +43,7 @@ $(document).ready(function(){
                 error: function (jqXHR, status) {
                     console.log(status);
                     alert('Registration failed. Email Id is not available.');
-                    base_url="http://localhost:8080/saas-project/rest/twitter/register";
+                    base_url="https://saas-project.herokuapp.com/rest/twitter/register";
                 }
              });
        }
