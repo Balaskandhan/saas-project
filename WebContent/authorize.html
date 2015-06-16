@@ -14,12 +14,13 @@ $(document).ready(function(){
 		else {
 			
 			base_url = base_url + "?username=" + emailid.value;
-			
-			postData();
+			alert("Registration successful.");
+            window.location.href=base_url;
+			//postData();
 		}
     	return false;
     });
-    function postData(){
+    /*function postData(){
         $.ajax({
                 type: "POST",
                 url: base_url,
@@ -33,7 +34,7 @@ $(document).ready(function(){
                     base_url="https://saas-project.herokuapp.com/rest/twitter/request";
                 }
              });
-       }
+       }*/
 });
 </script>
 </head>
