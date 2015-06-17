@@ -119,7 +119,7 @@ public class TwitterService {
 		if (tweetStatus != null)
 			return " " + tweetStatus.getText();
 		else
-			return "BOO! didn't work";
+			return "Tahnks for registering";
 	}
 
 	@GET
